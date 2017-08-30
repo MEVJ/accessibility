@@ -8,7 +8,8 @@
     "start": "nodemon app.js"
   },
   "repository": {
-
+    "type": "git",
+    "url": "git+https://github.com/MeanVJ/accessibility.git"
   },
   "keywords": [
     "rsvp"
@@ -16,8 +17,9 @@
   "author": "VJ",
   "license": "MIT",
   "bugs": {
+    "url": "https://github.com/MeanVJ/accessibility/issues"
   },
-
+  "homepage": "https://github.com/MeanVJ/accessibility#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
     "cors": "^2.8.3",
