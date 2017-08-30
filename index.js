@@ -31,7 +31,7 @@ var test = pa11y({
 		error: console.error.bind(console),
 		info: console.log.bind(console)
 	},
-/*
+
 	beforeScript: function(page, options, next) {
 
 		function waitUntil(condition, retries, waitOver) {
@@ -43,7 +43,8 @@ var test = pa11y({
 					retries -= 1;
 					setTimeout(function() {
 						waitUntil(condition, retries, waitOver);
-					}, 200);
+
+					}, 2000);
 				}
 			});
 		}
@@ -58,17 +59,26 @@ var test = pa11y({
 			user.value = 'exampleUser';
 			password.value = 'password1234';
 
-			submit.click();
+			//submit.click();
 
 		}, function() {
 
 			// Use the waitUntil function to set the condition, number of retries and the callback
 			waitUntil(function() {
-				return window.location.href === 'http://example.com/myaccount';
-			}, 20, next);
+        var elementExists = document.getElementById("signin_body");
+        if(elementExists){
+          return true;
+        }else{
+          return false;
+        }
+
+
+
+				//return window.location.href === 'http://example.com/myaccount';
+			}, 100, next);
 		});
-    return;
-	}*/
+
+	}
 
 });
 
@@ -76,7 +86,7 @@ var test = pa11y({
 router.route('/run').get(function(req, res) {
 
 
-  test.run('kamorta.com', function(error, result) {
+  test.run('http://localhost:3000/apps/auth/signin/', function(error, result) {
     if (error) {
       //return console.error(error.message);
       res.send(error.message);
