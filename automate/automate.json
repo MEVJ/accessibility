@@ -1,0 +1,9 @@
+{
+  "functions":[
+    {
+      "name":"SignOn",
+      "url":"http:localhost:3000/apps/auth/signin/",
+      "action":false
+    }
+  ]
+}

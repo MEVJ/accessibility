@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RSVP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1 style="color:#056dae;">Accessibility Automation</h1>
+            </div>
+        </div>
+        <div style="margin-bottom:5rem;"></div>
+
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
+                                ERROR
+                              </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                WARNING
+                              </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                NOTICE
+                              </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div style="margin-bottom:5rem;"></div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button id="run" type="button" class="btn btn-lg btn-success">RUN</button>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $("#run").click(function(e) {
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:3000/api/run"
+                }).done(function(result) {
+
+                  $.each(result, function( index, value ) {
+                    if(value.typeCode == 1){
+                      var temp="<div class='alert alert-danger' role='alert'>"+"Code: "+value.code+"<br>Message :"+value.message+"<br>Selector :"+value.selector+"</div>"
+                      $("#collapseOne .panel-body").append(temp);
+                    }else if(value.typeCode == 2){
+                      var temp="<div class='alert alert-warning' role='alert'>"+"Code: "+value.code+"<br>Message :"+value.message+"<br>Selector :"+value.selector+"</div>"
+                      $("#collapseTwo .panel-body").append(temp);
+                    }else if(value.typeCode == 3){
+                      var temp="<div class='alert alert-info' role='alert'>"+"Code: "+value.code+"<br>Message :"+value.message+"<br>Selector :"+value.selector+"</div>"
+                      $("#collapseThree .panel-body").append(temp);
+                    }
+                  });
+
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
